@@ -19,4 +19,4 @@ jobs:
           
           cat metrics.txt >> report.md
           cml-publish confusion_matrix.png --md --title 'confusion-matrix' >> report.md
-          cml-send-github-check report.md 
+          cml-send-comment report.md 
