@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: dvc_cml_run
+      - name: cml_run
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
