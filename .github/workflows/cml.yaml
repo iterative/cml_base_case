@@ -3,50 +3,50 @@ name: plot-IBGE-spatial-dataset
 on: [push]
 
 jobs:
-  deploy-cloud-runner:
-    runs-on: [ubuntu-latest]
-    container: docker://dvcorg/cml:latest
+    deploy-cloud-runner:
+        runs-on: [ubuntu-latest]
+        container: docker://dvcorg/cml:latest
 
-    steps:
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-
-
-      - name: deploy
-        shell: bash
-
-        env:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
-          GDRIVE_SECRET_ACCESS_KEY: ${{secrets.GDRIVE_access_token}}
-
-        run: |
-
-          echo "Deploying..."    
-
-          MACHINE="cml$(date +%s)"
+        steps:
+          - uses: actions/setup-python@v2
+            with:
+              python-version: '3.x'
 
 
-train:
-    needs: deploy-cloud-runner
-    runs-on: [self-hosted, cml]
+          - name: deploy
+            shell: bash
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: cml_run
-        env:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-        run: |
+            env:
+              repo_token: ${{ secrets.GITHUB_TOKEN }}
+              GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+              GDRIVE_SECRET_ACCESS_KEY: ${{secrets.GDRIVE_access_token}}
 
-          pip install -r requirements.txt
-          
-                         # Pull data & run-cache from Drive
-          dvc pull data --run-cache
-          dvc repro
-          
-          python concat_and_plot.py
-          
-          cml-publish results/figure/Domicilio_V147.png --md --title 'spatial Domicilio V147' >> report.md
-          cml-send-comment report.md
-        
+            run: |
+
+              echo "Deploying..."    
+
+              MACHINE="cml$(date +%s)"
+                        
+
+    test:
+        needs: deploy-cloud-runner
+        runs-on: [self-hosted, cml]
+
+        steps:
+          - uses: actions/checkout@v2
+          - name: cml_run
+            env:
+              repo_token: ${{ secrets.GITHUB_TOKEN }}
+            run: |
+
+              pip install -r requirements.txt
+              
+                             # Pull data & run-cache from Drive
+              dvc pull data --run-cache
+              dvc repro
+              
+              python concat_and_plot.py
+              
+              cml-publish results/figure/Domicilio_V147.png --md --title 'spatial Domicilio V147' >> report.md
+              cml-send-comment report.md
+            
