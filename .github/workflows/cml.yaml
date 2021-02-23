@@ -19,9 +19,14 @@ jobs:
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pip3 install -r requirements.txt
-          python train.py
+        
+                         # Pull data & run-cache from S3 and reproduce pipeline
+          dvc pull data --run-cache
+          dvc repro
           
-          cat metrics.txt >> report.md
-          cml-publish confusion_matrix.png --md --title 'confusion-matrix' >> report.md
-          cml-send-comment report.md 
+          pip3 install -r requirements.txt
+          python concat_and_plot.py
+          
+          cml-publish results/figure/Domicilio_V147.png --md --title 'spatial Domicilio V147' >> report.md
+          cml-send-comment report.md
+        
