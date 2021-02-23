@@ -1,3 +1,7 @@
 setuptools
 sklearn
 matplotlib
+cartopy
+geopandas
+pandas
+numpy
