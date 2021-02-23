@@ -1,2 +1,0 @@
-Accuracy: 0.872
-Tree depth: 5
