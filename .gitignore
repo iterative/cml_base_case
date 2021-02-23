@@ -1,6 +1,5 @@
 
-/data/** 
-/figure/** 
-/results/**  
+**/data/** 
+**/results/**  
 *.[png]
 *.[jpeg]
