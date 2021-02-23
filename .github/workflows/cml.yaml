@@ -1,30 +1,50 @@
-name: train-my-model
+name: plot-IBGE-spatial-dataset
 
 on: [push]
 
 jobs:
-  run:
+  deploy-cloud-runner:
     runs-on: [ubuntu-latest]
+    container: docker://dvcorg/cml:latest
 
     steps:
-      - uses: actions/checkout@v2
-
       - uses: actions/setup-python@v2
         with:
           python-version: '3.x'
 
-      - uses: iterative/setup-cml@v1
 
+      - name: deploy
+        shell: bash
+
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+          GDRIVE_SECRET_ACCESS_KEY: ${{"access_token": "ya29.A0AfH6SMCSxFIsbTQzlTZcMBBAvlDeYBc13EYaWRsE2Pd6Rq-7x_0am3ZG8DPUNwpGSlXUDO2tbSbHsdQ8YGxONUHyTO9C-wsBniKMgoViHl9zYI9rFFjnH0L9w5UJPvX4R0Prf5BEK6-3pUtr32q6ff68Krjj", "client_id": "710796635688-iivsgbgsb6uv1fap6635dhvuei09o66c.apps.googleusercontent.com", "client_secret": "a1Fz59uTpVNeG_VGuSKDLJXv", "refresh_token": "1//0hsXCh-yxkpBVCgYIARAAGBESNwF-L9IrH-iyzIx1DAAV0tymc92IgwGhobVwbcPFG2vehUWuwGjEluTigxGLHMv3wj-5zHXKD3M", "token_expiry": "2021-02-23T19:49:16Z", "token_uri": "https://oauth2.googleapis.com/token", "user_agent": null, "revoke_uri": "https://oauth2.googleapis.com/revoke", "id_token": null, "id_token_jwt": null, "token_response": {"access_token": "ya29.A0AfH6SMCSxFIsbTQzlTZcMBBAvlDeYBc13EYaWRsE2Pd6Rq-7x_0am3ZG8DPUNwpGSlXUDO2tbSbHsdQ8YGxONUHyTO9C-wsBniKMgoViHl9zYI9rFFjnH0L9w5UJPvX4R0Prf5BEK6-3pUtr32q6ff68Krjj", "expires_in": 3599, "refresh_token": "1//0hsXCh-yxkpBVCgYIARAAGBESNwF-L9IrH-iyzIx1DAAV0tymc92IgwGhobVwbcPFG2vehUWuwGjEluTigxGLHMv3wj-5zHXKD3M", "scope": "https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appdata", "token_type": "Bearer"}, "scopes": ["https://www.googleapis.com/auth/drive.appdata", "https://www.googleapis.com/auth/drive"], "token_info_uri": "https://oauth2.googleapis.com/tokeninfo", "invalid": false, "_class": "OAuth2Credentials", "_module": "oauth2client.client"}}
+
+        run: |
+
+          echo "Deploying..."    
+
+          MACHINE="cml$(date +%s)"
+
+
+train:
+    needs: deploy-cloud-runner
+    runs-on: [self-hosted, cml]
+
+    steps:
+      - uses: actions/checkout@v2
       - name: cml_run
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
-        
-                         # Pull data & run-cache from S3 and reproduce pipeline
+
+          pip install -r requirements.txt
+          
+                         # Pull data & run-cache from Drive
           dvc pull data --run-cache
           dvc repro
           
-          pip3 install -r requirements.txt
           python concat_and_plot.py
           
           cml-publish results/figure/Domicilio_V147.png --md --title 'spatial Domicilio V147' >> report.md

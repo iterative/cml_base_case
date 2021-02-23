@@ -6,6 +6,6 @@ stages:
     outs:
       - results
      plots:
-      - auc.json:
+      - results:
           cache: false
         
