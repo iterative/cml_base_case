@@ -1,2 +1,5 @@
-/results/**
-/data/**
+**/results/
+**/data/
+data 
+figure 
+results 
