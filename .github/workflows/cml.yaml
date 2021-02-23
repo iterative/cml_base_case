@@ -23,21 +23,9 @@ jobs:
 
             run: |
 
-              echo "Deploying..."    
+              echo "\n\n\t\tDeploying... \n\n\n\n"    
 
               MACHINE="cml$(date +%s)"
-                        
-
-    test:
-        needs: deploy-cloud-runner
-        runs-on: [self-hosted, cml]
-
-        steps:
-          - uses: actions/checkout@v2
-          - name: cml_run
-            env:
-              repo_token: ${{ secrets.GITHUB_TOKEN }}
-            run: |
 
               pip install -r requirements.txt
               
@@ -45,7 +33,7 @@ jobs:
               dvc pull data --run-cache
               dvc repro
               
-              python concat_and_plot.py
+              python concat_and_plot.py | echo # | tee logfile.log
               
               cml-publish results/figure/Domicilio_V147.png --md --title 'spatial Domicilio V147' >> report.md
               cml-send-comment report.md
