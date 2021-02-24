@@ -1,5 +1,6 @@
-
+*__pycache__
+*desktop.ini
 #data/
 #results/
-*.png
-*.jpeg
+#*.png
+#*.jpeg
