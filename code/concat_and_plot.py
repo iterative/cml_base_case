@@ -15,7 +15,7 @@ if '__main__' == __name__:
 else:
     LOCAL_DIR = os.path.dirname(str(__file__))
 
-FIGURES_DIRECTORY = os.path.join(get_parent_dirs(1) , r'results\figure')
+FIGURES_DIRECTORY = os.path.join(get_parent_dirs(1) , 'results/figure')
 
 if not os.path.exists(FIGURES_DIRECTORY):
     os.makedirs(FIGURES_DIRECTORY)
