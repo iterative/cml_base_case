@@ -22,8 +22,10 @@ jobs:
                                          #GDRIVE_SECRET_ACCESS_KEY: ${{secrets.GDRIVE_ACCESS_TOKEN}}
 
             run: |
-
-                  echo "\n\n\t\tDeploying... \n\n\n\n"    
+                  
+                  
+                  echo "## Model run" > report.md
+                  echo "\n\n\t\tDeploying... \n\n\n\n" >> report.md
 
                   pip install -r requirements.txt
                   
@@ -31,7 +33,9 @@ jobs:
                                             # dvc pull data
                                             # dvc repro
                   
-                  python concat_and_plot.py | echo # | tee logfile.log
+                  python concat_and_plot.py >> report.md # | tee logfile.log
+                  
+                  echo "## Model plots" >> report.md
                   
                   cml-publish results/figure/Domicilio_V147.png --md --title 'spatial Domicilio V147' >> report.md
                   
