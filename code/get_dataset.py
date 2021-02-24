@@ -9,7 +9,7 @@ def get_ibge_relacional(filename='PA_2018.shp'):
     dir_path = os.path.join(
     
                 get_parent_dirs(1),
-                r'data\ibge\shp_relacional'
+                'data/ibge/shp_relacional'
                 )
                 
     filename = os.path.join(dir_path, filename)
@@ -29,7 +29,7 @@ def get_ibge_census_data(filename='Domi_Entorno_normalized_formatados.csv'):
     dir_path = os.path.join(
     
                 get_parent_dirs(1),
-                r'data\ibge\censo'
+                'data/ibge/censo'
                 )
                 
     filename = os.path.join(dir_path, filename)
@@ -48,7 +48,7 @@ def get_census_tract_shp_data(filename='15SEE250GC_SIR.shp'):
     dir_path = os.path.join(
     
                 get_parent_dirs(1),
-                r'data\ibge\shp_censo'
+                'data/ibge/shp_censo'
                 )
                 
     filename = os.path.join(dir_path, filename)
