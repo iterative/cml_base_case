@@ -2,7 +2,9 @@ pip
 setuptools
 sklearn
 matplotlib
-cartopy
+cython
 geopandas
 pandas
 numpy
+cartopy
+
