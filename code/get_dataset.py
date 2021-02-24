@@ -8,7 +8,7 @@ def get_ibge_relacional(filename='PA_2018.shp'):
 
     dir_path = os.path.join(
     
-                get_parent_dirs(1),
+                'cml_base_case',
                 'data/ibge/shp_relacional'
                 )
                 
@@ -28,7 +28,7 @@ def get_ibge_census_data(filename='Domi_Entorno_normalized_formatados.csv'):
 
     dir_path = os.path.join(
     
-                get_parent_dirs(1),
+                'cml_base_case',
                 'data/ibge/censo'
                 )
                 
@@ -47,7 +47,7 @@ def get_census_tract_shp_data(filename='15SEE250GC_SIR.shp'):
     
     dir_path = os.path.join(
     
-                get_parent_dirs(1),
+                'cml_base_case',
                 'data/ibge/shp_censo'
                 )
                 
