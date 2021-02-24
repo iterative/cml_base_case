@@ -29,7 +29,7 @@ def make_fig_and_axes(fig_name):
     
     fig.suptitle(fig_name)
     
-    gl = ax.grids()
+    gl = ax.grid()
     
     fig_filename = os.path.join(FIGURES_DIRECTORY, fig_name + '.png')
     
