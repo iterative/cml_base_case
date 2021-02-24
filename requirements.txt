@@ -6,5 +6,3 @@ cython
 geopandas
 pandas
 numpy
-cartopy
-
