@@ -3,6 +3,7 @@ setuptools
 sklearn
 matplotlib
 cython
+descartes
 geopandas
 pandas
 numpy
