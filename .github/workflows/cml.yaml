@@ -8,9 +8,9 @@ jobs:
         container: docker://dvcorg/cml-py3:latest
 
         steps:
-          - uses: actions/setup-python@v2
-            with:
-              python-version: '3.8.x'
+          #- uses: actions/setup-python@v2
+           # with:
+            #  python-version: '3.8.x'
 
 
           - name: cml_run
