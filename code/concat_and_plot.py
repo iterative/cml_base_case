@@ -1,6 +1,4 @@
 import geopandas as gpd
-import cartopy.crs as ccrs
-from cartopy import feature as cfeature
 import glob
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -22,10 +20,6 @@ FIGURES_DIRECTORY = os.path.join(get_parent_dirs(1) , r'results\figure')
 if not os.path.exists(FIGURES_DIRECTORY):
     os.makedirs(FIGURES_DIRECTORY)
 
-
-OCEAN = cfeature.OCEAN
-LAND = cfeature.LAND
-
 def check_if_numeric(x):
 
     try:
@@ -35,20 +29,15 @@ def check_if_numeric(x):
         return False
 
 def make_fig_and_axes(fig_name):
-    
-    projection = ccrs.PlateCarree()
-    
-    fig, ax = plt.subplots(subplot_kw={'projection':projection})
+
+    fig, ax = plt.subplots(subplot_kw={'aspect':'equal'})
     
     fig.suptitle(fig_name)
     
     ax.coastlines(resolution='50m', color='black', linewidth=1)
-    ax.add_feature(OCEAN, zorder=0)
-    ax.add_feature(LAND, zorder=0, edgecolor='black')
     
-    gl = ax.gridlines(draw_labels=True)
-    gl.top_labels=False
-    gl.right_labels=False
+    
+    gl = ax.grids()
     
     fig_filename = os.path.join(FIGURES_DIRECTORY, fig_name + '.png')
     
