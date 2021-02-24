@@ -29,9 +29,6 @@ def make_fig_and_axes(fig_name):
     
     fig.suptitle(fig_name)
     
-    ax.coastlines(resolution='50m', color='black', linewidth=1)
-    
-    
     gl = ax.grids()
     
     fig_filename = os.path.join(FIGURES_DIRECTORY, fig_name + '.png')
