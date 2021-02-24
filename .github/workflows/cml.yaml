@@ -5,7 +5,7 @@ on: [push]
 jobs:
     deploy-cloud-runner:
         runs-on: [ubuntu-latest]
-        container: docker://dvcorg/cml:latest
+        container: docker://dvcorg/cml-py3:latest
 
         steps:
           - uses: actions/setup-python@v2
@@ -13,7 +13,7 @@ jobs:
               python-version: '3.8.x'
 
 
-          - name: deploy
+          - name: cml_run
             shell: bash
 
             env:
@@ -23,21 +23,19 @@ jobs:
 
             run: |
 
-              echo "\n\n\t\tDeploying... \n\n\n\n"    
+                  echo "\n\n\t\tDeploying... \n\n\n\n"    
 
-              MACHINE="cml$(date +%s)"
-
-              pip install -r requirements.txt
-              
-                             # Pull data & run-cache from Drive
-                                    # dvc pull data
-                                    # dvc repro
-              
-              python concat_and_plot.py | echo # | tee logfile.log
-              
-              cml-publish results/figure/Domicilio_V147.png --md --title 'spatial Domicilio V147' >> report.md
-              
-              cml-send-comment report.md
-              
+                  pip install -r requirements.txt
+                  
+                                            # Pull data & run-cache from Drive
+                                            # dvc pull data
+                                            # dvc repro
+                  
+                  python concat_and_plot.py | echo # | tee logfile.log
+                  
+                  cml-publish results/figure/Domicilio_V147.png --md --title 'spatial Domicilio V147' >> report.md
+                  
+                  cml-send-comment report.md
+                  
               
             
