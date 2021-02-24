@@ -18,8 +18,8 @@ jobs:
 
             env:
               repo_token: ${{ secrets.GITHUB_TOKEN }}
-              GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
-              GDRIVE_SECRET_ACCESS_KEY: ${{secrets.GDRIVE_ACCESS_TOKEN}}
+                                         #GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+                                         #GDRIVE_SECRET_ACCESS_KEY: ${{secrets.GDRIVE_ACCESS_TOKEN}}
 
             run: |
 
@@ -30,16 +30,14 @@ jobs:
               pip install -r requirements.txt
               
                              # Pull data & run-cache from Drive
-              dvc pull data
-              dvc repro
+                                    # dvc pull data
+                                    # dvc repro
               
               python concat_and_plot.py | echo # | tee logfile.log
               
               cml-publish results/figure/Domicilio_V147.png --md --title 'spatial Domicilio V147' >> report.md
+              
               cml-send-comment report.md
               
-              outs:
-                    - results
-                
               
             
