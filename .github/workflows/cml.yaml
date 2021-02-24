@@ -8,38 +8,32 @@ jobs:
         container: docker://dvcorg/cml-py3:latest
 
         steps:
-          #- uses: actions/setup-python@v2
-           # with:
-            #  python-version: '3.8.x'
-
+          - uses: actions/checkout@v2
+            
 
           - name: cml_run
             shell: bash
 
             env:
               repo_token: ${{ secrets.GITHUB_TOKEN }}
-                                         #GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
-                                         #GDRIVE_SECRET_ACCESS_KEY: ${{secrets.GDRIVE_ACCESS_TOKEN}}
+                                       
 
             run: |
                   
                   
                   echo "## Model run" > report.md
-                  echo "\n\n\t\tDeploying... \n\n\n\n" >> report.md
-
+                  
                   pip install -r requirements.txt
                   
-                                            # Pull data & run-cache from Drive
-                                            # dvc pull data
-                                            # dvc repro
                   
-                  python concat_and_plot.py >> report.md # | tee logfile.log
+                  # main code to run
+                  python code/concat_and_plot.py >> report.md
                   
+                  
+                  # Results
                   echo "## Model plots" >> report.md
                   
+                  # plotting in md
                   cml-publish results/figure/Domicilio_V147.png --md --title 'spatial Domicilio V147' >> report.md
                   
                   cml-send-comment report.md
-                  
-              
-            
