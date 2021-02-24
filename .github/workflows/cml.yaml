@@ -10,7 +10,7 @@ jobs:
         steps:
           - uses: actions/setup-python@v2
             with:
-              python-version: '3.x'
+              python-version: '3.8.x'
 
 
           - name: deploy
@@ -19,7 +19,7 @@ jobs:
             env:
               repo_token: ${{ secrets.GITHUB_TOKEN }}
               GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
-              GDRIVE_SECRET_ACCESS_KEY: ${{secrets.GDRIVE_access_token}}
+              GDRIVE_SECRET_ACCESS_KEY: ${{secrets.GDRIVE_ACCESS_TOKEN}}
 
             run: |
 
@@ -30,11 +30,16 @@ jobs:
               pip install -r requirements.txt
               
                              # Pull data & run-cache from Drive
-              dvc pull data --run-cache
+              dvc pull data
               dvc repro
               
               python concat_and_plot.py | echo # | tee logfile.log
               
               cml-publish results/figure/Domicilio_V147.png --md --title 'spatial Domicilio V147' >> report.md
               cml-send-comment report.md
+              
+              outs:
+                    - results
+                
+              
             

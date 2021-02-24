@@ -1,5 +1,5 @@
 
-data/
-results/
+#data/
+#results/
 *.png
 *.jpeg
