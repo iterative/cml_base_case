@@ -9,13 +9,8 @@ from get_dataset import merge_ibge_data
 from utils.helpers import get_parent_dirs
 
 
-if '__main__' == __name__:
-    LOCAL_DIR = os.getcwd()
-    
-else:
-    LOCAL_DIR = os.path.dirname(str(__file__))
 
-FIGURES_DIRECTORY = os.path.join(get_parent_dirs(1) , 'results/figure')
+FIGURES_DIRECTORY = os.path.join('results/figure')
 
 if not os.path.exists(FIGURES_DIRECTORY):
     os.makedirs(FIGURES_DIRECTORY)
