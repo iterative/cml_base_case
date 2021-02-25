@@ -16,6 +16,8 @@ jobs:
 
             env:
               repo_token: ${{ secrets.GITHUB_TOKEN }}
+              
+                 GDRIVE_CREDENTIALS_DATA: ${{https://drive.google.com/drive/folders/1UiRXNtLBlLzirA0bSKkT8lF-zjQTTjIz?usp=sharing}}
                                        
 
             run: |
@@ -25,6 +27,10 @@ jobs:
                   
                   pip install -r requirements.txt
                   
+                  
+                  # Pull data & run-cache from google Drive and reproduce pipeline
+                  dvc pull data --run-cache
+                  dvc repro
                   
                   # main code to run
                   python code/concat_and_plot.py >> report.md
