@@ -29,7 +29,7 @@ jobs:
                   
                   
                   # Pull data & run-cache from google Drive and reproduce pipeline
-                  dvc pull data --run-cache
+                  dvc pull data #  --run-cache
                   dvc repro
                   
                   # main code to run
