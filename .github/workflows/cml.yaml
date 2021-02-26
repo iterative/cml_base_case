@@ -34,16 +34,12 @@ jobs:
                   # main code to run
                   python code/concat_and_plot.py
                   
-                  - params:
-                          
-                      code/list_of_plots.yaml:filenames
-
       
                   # Results
                   echo "## Model plots" > report.md
                   
                   # plotting in md each of the listed figures:
-                  foreach: ${filenames}$
+                  foreach: ${code/list_of_plots.yaml:filenames}$
                       do:
                           echo "adding " + ${key} + " to report"
                           cml-publish ${item.prop1} --md --title ${key} >> report.md
