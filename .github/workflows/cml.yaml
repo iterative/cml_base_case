@@ -29,8 +29,8 @@ jobs:
                   
                   
                   # Pull data & run-cache from google Drive and reproduce pipeline
-                  dvc pull data #  --run-cache
-                  dvc repro
+                  # dvc pull data #  --run-cache
+                  # dvc repro
                   
                   # main code to run
                   python code/concat_and_plot.py >> report.md
