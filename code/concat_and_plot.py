@@ -72,7 +72,7 @@ def plot_datasets():
             
             fig.savefig(fig_filename,dpi=100)
             
-            dict_of_filenames['filenames'][col] = os.path.join(*str(fig_filename).split('cml_base_case')[1:])
+            dict_of_filenames['filenames'][col] = '/'.join(str(fig_filename).split('cml_base_case')[1:])
             
             plt.close(fig)
     
