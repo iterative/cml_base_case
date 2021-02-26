@@ -20,8 +20,7 @@ jobs:
               
                                           # GDRIVE_CREDENTIALS_DATA: ''
                 
-            params:
-                results/list_of_plots.yaml:filenames
+            
                
             run: |
                   
@@ -38,6 +37,9 @@ jobs:
                   # main code to run
                   python code/concat_and_plot.py | echo
                   
+                  params:
+                  
+                    results/list_of_plots.yaml:filenames
                   
                   # Results
                   echo "## Model plots" > report.md
