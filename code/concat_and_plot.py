@@ -4,13 +4,14 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from pandas.api.types import is_numeric_dtype
 import os
+import numpy as np
 
 from get_dataset import merge_ibge_data
 from utils.helpers import get_parent_dirs
 
 
 
-FIGURES_DIRECTORY = os.path.join('results/figure')
+FIGURES_DIRECTORY = os.path.join(r'results\figure')
 
 if not os.path.exists(FIGURES_DIRECTORY):
     os.makedirs(FIGURES_DIRECTORY)
@@ -37,12 +38,30 @@ def make_fig_and_axes(fig_name):
     
     return fig, ax, fig_filename
 
+def write_to_yaml(dict_of_filenames):
+
+    import yaml
+
+    
+    print(dict_of_filenames)
+    
+    
+    with open(r'list_of_plots.yaml', 'w') as file:
+        documents = yaml.dump(dict_of_filenames, file)
+
 def plot_datasets():
 
     gdf = merge_ibge_data().to_crs(epsg= 4326)
     
+    dict_of_filenames = {'filenames': dict()}
+    
+    i = 0
+    
     for col in gdf.columns:
         if check_if_numeric(gdf[col]):
+            i = i + 1
+            if i >5:
+                break
             print('Plotting figure of {0}'.format(col), end='\n'*3)
         
             fig, ax, fig_filename = make_fig_and_axes(col)
@@ -51,10 +70,14 @@ def plot_datasets():
             
             fig.show()
             
-            fig.savefig(fig_filename)
+            fig.savefig(fig_filename,dpi=100)
+            
+            dict_of_filenames['filenames'][col] = os.path.join(*str(fig_filename).split('cml_base_case')[1:])
             
             plt.close(fig)
     
+    
+    write_to_yaml(dict_of_filenames)
     
 if '__main__' == __name__:
     plot_datasets()

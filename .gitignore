@@ -25,6 +25,6 @@ var/
 
 #data/
 #results/
-#*.png
-#*.jpeg
-/data
+*.png
+*.jpeg
+

@@ -39,7 +39,9 @@ jobs:
                   # Results
                   echo "## Model plots" >> report.md
                   
-                  # plotting in md
-                  cml-publish results/figure/Domicilio_V147.png --md --title 'spatial Domicilio V147' >> report.md
-                  
+                  # plotting in md each of the listed figures:
+                  foreach: ${filenames}$
+                      do:
+                        cml-publish ${item.prop1} --md --title ${key} >> report.md
+                      
                   cml-send-comment report.md
