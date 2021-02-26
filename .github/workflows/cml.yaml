@@ -19,8 +19,9 @@ jobs:
               repo_token: ${{ secrets.GITHUB_TOKEN }}
               
                                           # GDRIVE_CREDENTIALS_DATA: ''
-
-            
+                
+            params:
+                results/list_of_plots.yaml:filenames
                
             run: |
                   
