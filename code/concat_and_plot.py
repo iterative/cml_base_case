@@ -5,7 +5,7 @@ import pandas as pd
 from pandas.api.types import is_numeric_dtype
 import os
 import numpy as np
-
+import yaml
 from get_dataset import merge_ibge_data
 from utils.helpers import get_parent_dirs
 
@@ -40,7 +40,7 @@ def make_fig_and_axes(fig_name):
 
 def write_to_yaml(dict_of_filenames):
 
-    import yaml
+    
 
     
     print(dict_of_filenames)

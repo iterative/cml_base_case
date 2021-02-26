@@ -1,4 +1,5 @@
 setuptools
+pyyaml
 sklearn
 matplotlib
 cython
