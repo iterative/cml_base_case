@@ -39,7 +39,7 @@ jobs:
                   echo "## Model plots" > report.md
                   
                   # plotting in md each of the listed figures:
-                  foreach: ${code/list_of_plots.yaml:filenames}$
+                  foreach: ${code/list_of_plots.yaml:filenames}
                       do:
                           echo "adding " + ${key} + " to report"
                           cml-publish ${item.prop1} --md --title ${key} >> report.md
