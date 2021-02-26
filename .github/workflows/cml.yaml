@@ -32,7 +32,7 @@ jobs:
                   # dvc repro
               
                   # main code to run
-                  python code/concat_and_plot.py | echo
+                  python code/concat_and_plot.py
                   
                   - params:
                           
