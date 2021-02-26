@@ -35,11 +35,11 @@ jobs:
                   # dvc repro
                   
                   # main code to run
-                  python code/concat_and_plot.py >> report.md
+                  python code/concat_and_plot.py | echo
                   
                   
                   # Results
-                  echo "## Model plots" >> report.md
+                  echo "## Model plots" > report.md
                   
                   # plotting in md each of the listed figures:
                   foreach: ${filenames}$
