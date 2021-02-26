@@ -34,8 +34,6 @@ def make_fig_and_axes(fig_name):
     
     fig_filename = os.path.join(FIGURES_DIRECTORY, fig_name + '.png')
     
-    print('saving {1} in \n\t {0} \n\n'.format(FIGURES_DIRECTORY, (fig_name + '.png')))
-    
     return fig, ax, fig_filename
 
 def write_to_yaml(dict_of_filenames):
@@ -57,7 +55,6 @@ def plot_datasets():
             i = i + 1
             if i >5:
                 break
-            print('Plotting figure of {0}'.format(col), end='\n'*3)
         
             fig, ax, fig_filename = make_fig_and_axes(col)
         
