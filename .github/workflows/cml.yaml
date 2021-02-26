@@ -45,6 +45,7 @@ jobs:
                   # plotting in md each of the listed figures:
                   foreach: ${filenames}$
                       do:
+                          echo "adding " + ${key} + " to report"
                           cml-publish ${item.prop1} --md --title ${key} >> report.md
                       
                   cml-send-comment report.md

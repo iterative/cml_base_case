@@ -40,11 +40,8 @@ def make_fig_and_axes(fig_name):
 
 def write_to_yaml(dict_of_filenames):
 
-    
-    print(dict_of_filenames)
-    
-    yaml_filename = os.path.join('list_of_plots.yaml')
-    with open(yaml_filename, 'w') as file:
+
+    with open('list_of_plots.yaml', 'w') as file:
         documents = yaml.dump(dict_of_filenames, file)
 
 def plot_datasets():
