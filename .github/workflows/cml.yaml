@@ -2,6 +2,10 @@ name: plot-IBGE-spatial-dataset
 
 on: [push]
 
+imports:
+    - { resource: cml_base_case/code/list_of_plots.yaml }
+                
+
 jobs:
     deploy-cloud-runner:
         runs-on: [ubuntu-latest]
@@ -19,9 +23,7 @@ jobs:
               
                                           # GDRIVE_CREDENTIALS_DATA: ''
 
-            imports:
-                - { resource: cml_base_case/code/list_of_plots.yaml }
-                
+            
                
             run: |
                   
