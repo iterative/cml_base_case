@@ -38,7 +38,7 @@ jobs:
                   
         params:
                   
-            results/list_of_plots.yaml:filenames
+            code/list_of_plots.yaml:filenames
 
             run: |
                   
