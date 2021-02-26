@@ -9,44 +9,45 @@ jobs:
         container: docker://dvcorg/cml-py3:latest
 
         steps:
-          - uses: actions/checkout@v2
+            - uses: actions/checkout@v2
             
 
-          - name: cml_run
-            shell: bash
+            - name: cml_run
+                shell: bash
 
             env:
-              repo_token: ${{ secrets.GITHUB_TOKEN }}
+                repo_token: ${{ secrets.GITHUB_TOKEN }}
               
-                                          # GDRIVE_CREDENTIALS_DATA: ''
+                                                #  GDRIVE_CREDENTIALS_DATA: ''
                 
             
                
             run: |
                   
+                echo "## Model run" > report.md
+              
+                pip install -r requirements.txt
+              
+              
+                # Pull data & run-cache from google Drive and reproduce pipeline
+                # dvc pull data #  --run-cache
+                # dvc repro
+              
+                # main code to run
+                python code/concat_and_plot.py | echo
                   
-                  echo "## Model run" > report.md
+        params:
                   
-                  pip install -r requirements.txt
+            results/list_of_plots.yaml:filenames
+
+            run: |
                   
+                # Results
+                echo "## Model plots" > report.md
                   
-                  # Pull data & run-cache from google Drive and reproduce pipeline
-                  # dvc pull data #  --run-cache
-                  # dvc repro
-                  
-                  # main code to run
-                  python code/concat_and_plot.py | echo
-                  
-                  params:
-                  
-                    results/list_of_plots.yaml:filenames
-                  
-                  # Results
-                  echo "## Model plots" > report.md
-                  
-                  # plotting in md each of the listed figures:
-                  foreach: ${filenames}$
-                      do:
+                # plotting in md each of the listed figures:
+                foreach: ${filenames}$
+                    do:
                         cml-publish ${item.prop1} --md --title ${key} >> report.md
                       
-                  cml-send-comment report.md
+                cml-send-comment report.md
