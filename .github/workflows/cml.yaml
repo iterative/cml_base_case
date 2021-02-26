@@ -15,39 +15,39 @@ jobs:
             - name: cml_run
                 shell: bash
 
-            env:
-                repo_token: ${{ secrets.GITHUB_TOKEN }}
-              
-                                                #  GDRIVE_CREDENTIALS_DATA: ''
+                env:
+                    repo_token: ${{ secrets.GITHUB_TOKEN }}
+                  
+                    #  GDRIVE_CREDENTIALS_DATA: ''
+                    
                 
-            
-               
-            run: |
-                  
-                echo "## Model run" > report.md
-              
-                pip install -r requirements.txt
-              
-              
-                # Pull data & run-cache from google Drive and reproduce pipeline
-                # dvc pull data #  --run-cache
-                # dvc repro
-              
-                # main code to run
-                python code/concat_and_plot.py | echo
-                  
-            params:
+                   
+                run: |
                       
-                code/list_of_plots.yaml:filenames
+                    echo "## Model run" > report.md
+                  
+                    pip install -r requirements.txt
+                  
+                  
+                    # Pull data & run-cache from google Drive and reproduce pipeline
+                    # dvc pull data #  --run-cache
+                    # dvc repro
+                  
+                    # main code to run
+                    python code/concat_and_plot.py | echo
+                      
+                params:
+                          
+                    code/list_of_plots.yaml:filenames
 
-            run: |
-                  
-                # Results
-                echo "## Model plots" > report.md
-                  
-                # plotting in md each of the listed figures:
-                foreach: ${filenames}$
-                    do:
-                        cml-publish ${item.prop1} --md --title ${key} >> report.md
+                run: |
                       
-                cml-send-comment report.md
+                    # Results
+                    echo "## Model plots" > report.md
+                      
+                    # plotting in md each of the listed figures:
+                    foreach: ${filenames}$
+                        do:
+                            cml-publish ${item.prop1} --md --title ${key} >> report.md
+                          
+                    cml-send-comment report.md
