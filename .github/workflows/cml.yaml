@@ -36,9 +36,9 @@ jobs:
                 # main code to run
                 python code/concat_and_plot.py | echo
                   
-        params:
-                  
-            code/list_of_plots.yaml:filenames
+            params:
+                      
+                code/list_of_plots.yaml:filenames
 
             run: |
                   
