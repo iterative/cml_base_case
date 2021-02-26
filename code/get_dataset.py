@@ -4,11 +4,13 @@ import glob
 import os
 from utils.helpers import get_parent_dirs
 
+base_path = os.path.join('data/ibge')
+
 def get_ibge_relacional(filename='PA_2018.shp'):
 
-    dir_path = os.path.join(
+    dir_path = os.path.join(base_path,
     
-                'data/ibge/shp_relacional'
+                'shp_relacional'
                 )
                 
     filename = os.path.join(dir_path, filename)
@@ -25,9 +27,9 @@ def get_ibge_relacional(filename='PA_2018.shp'):
 
 def get_ibge_census_data(filename='Domi_Entorno_normalized_formatados.csv'):
 
-    dir_path = os.path.join( 
+    dir_path = os.path.join( base_path,
     
-                'data/ibge/censo'
+                'censo'
                 )
                 
     filename = os.path.join(dir_path, filename)
@@ -43,9 +45,9 @@ def get_ibge_census_data(filename='Domi_Entorno_normalized_formatados.csv'):
 
 def get_census_tract_shp_data(filename='15SEE250GC_SIR.shp'):
     
-    dir_path = os.path.join( 
+    dir_path = os.path.join( base_path,
     
-                'data/ibge/shp_censo'
+                'shp_censo'
                 )
                 
     filename = os.path.join(dir_path, filename)
