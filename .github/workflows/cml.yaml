@@ -2,7 +2,7 @@ name: plot-IBGE-spatial-dataset
 
 on: [push]
 
-imports:
+import:
     - { resource: cml_base_case/code/list_of_plots.yaml }
                 
 
