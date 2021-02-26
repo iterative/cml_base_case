@@ -18,11 +18,10 @@ jobs:
               repo_token: ${{ secrets.GITHUB_TOKEN }}
               
                                           # GDRIVE_CREDENTIALS_DATA: ''
-                                       
-               
-               imports:
-                    - { resource: cml_base_case/code/list_of_plots.yaml }
-                    
+
+            imports:
+                - { resource: cml_base_case/code/list_of_plots.yaml }
+                
                
             run: |
                   
