@@ -43,7 +43,8 @@ def write_to_yaml(dict_of_filenames):
     
     print(dict_of_filenames)
     
-    yaml_filename = os.path.join('results', 
+    yaml_filename = os.path.join('.',
+                                 'results', 
                                  'list_of_plots.yaml')
     with open(yaml_filename, 'w') as file:
         documents = yaml.dump(dict_of_filenames, file)
