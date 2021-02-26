@@ -11,7 +11,7 @@ from utils.helpers import get_parent_dirs
 
 
 
-FIGURES_DIRECTORY = os.path.join(r'results\figure')
+FIGURES_DIRECTORY = os.path.join('results/figure')
 
 if not os.path.exists(FIGURES_DIRECTORY):
     os.makedirs(FIGURES_DIRECTORY)
