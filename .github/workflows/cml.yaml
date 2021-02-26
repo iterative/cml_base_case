@@ -2,52 +2,49 @@ name: plot-IBGE-spatial-dataset
 
 on: [push]
 
-
 jobs:
     deploy-cloud-runner:
         runs-on: [ubuntu-latest]
         container: docker://dvcorg/cml-py3:latest
 
         steps:
-            - uses: actions/checkout@v2
+          - uses: actions/checkout@v2
             
 
-            - name: cml_run
-                shell: bash
+          - name: cml_run
+            shell: bash
 
-                env:
-                    repo_token: ${{ secrets.GITHUB_TOKEN }}
-                  
-                    #  GDRIVE_CREDENTIALS_DATA: ''
+            env:
+              repo_token: ${{ secrets.GITHUB_TOKEN }}
                     
-                
-                   
-                run: |
+            
+               
+            run: |
+                  
+                echo "## Model run" > report.md
+              
+                pip install -r requirements.txt
+              
+              
+                # Pull data & run-cache from google Drive and reproduce pipeline
+                # dvc pull data #  --run-cache
+                # dvc repro
+              
+                # main code to run
+                python code/concat_and_plot.py | echo
+                  
+            params:
                       
-                    echo "## Model run" > report.md
-                  
-                    pip install -r requirements.txt
-                  
-                  
-                    # Pull data & run-cache from google Drive and reproduce pipeline
-                    # dvc pull data #  --run-cache
-                    # dvc repro
-                  
-                    # main code to run
-                    python code/concat_and_plot.py | echo
-                      
-                params:
-                          
-                    code/list_of_plots.yaml:filenames
+                code/list_of_plots.yaml:filenames
 
-                run: |
+            run: |
+                  
+                # Results
+                echo "## Model plots" > report.md
+                  
+                # plotting in md each of the listed figures:
+                foreach: ${filenames}$
+                    do:
+                        cml-publish ${item.prop1} --md --title ${key} >> report.md
                       
-                    # Results
-                    echo "## Model plots" > report.md
-                      
-                    # plotting in md each of the listed figures:
-                    foreach: ${filenames}$
-                        do:
-                            cml-publish ${item.prop1} --md --title ${key} >> report.md
-                          
-                    cml-send-comment report.md
+                cml-send-comment report.md
