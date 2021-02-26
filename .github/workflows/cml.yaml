@@ -19,7 +19,11 @@ jobs:
               
                                           # GDRIVE_CREDENTIALS_DATA: ''
                                        
-
+               
+               imports:
+                    - { resource: cml_base_case/code/list_of_plots.yaml }
+                    
+               
             run: |
                   
                   
@@ -40,7 +44,7 @@ jobs:
                   echo "## Model plots" >> report.md
                   
                   # plotting in md each of the listed figures:
-                  foreach: ${cml_base_case\code\list_of_plots.yaml.filenames}$
+                  foreach: ${cml_base_case/code/list_of_plots.filenames}$
                       do:
                         cml-publish ${item.prop1} --md --title ${key} >> report.md
                       
