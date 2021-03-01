@@ -5,12 +5,17 @@ on: [push]
 jobs:
   run:
     runs-on: [ubuntu-latest]
-    container: docker://dvcorg/cml-py3:latest
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: cml_run
+      - uses: iterative/setup-cml@v1
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: cml
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
