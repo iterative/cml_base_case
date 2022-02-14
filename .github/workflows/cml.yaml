@@ -1,5 +1,5 @@
 name: train-my-model
-on: [push]
+on: [push, pull_request]
 jobs:
   train-model:
     runs-on: ubuntu-latest
@@ -8,7 +8,7 @@ jobs:
       - uses: iterative/setup-cml@v1
       - uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: "3.x"
       - name: Train model
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -19,4 +19,4 @@ jobs:
           # Create CML report
           cat metrics.txt >> report.md
           cml publish plot.png --md --title 'Confusion Matrix' >> report.md
-          cml send-comment report.md
+          cml send-comment --pr --update report.md
