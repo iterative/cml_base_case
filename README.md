@@ -2,7 +2,7 @@
 
 This repository contains a sample project using [CML](https://github.com/iterative/cml). When a pull request is made in this repository, the following will occur:
 - GitHub will deploy a runner machine with a specified CML Docker environment
-- The runner will execute a workflow to train a ML model (`python train.py`)
+- The runner will execute a workflow to train a  ML model (`python train.py`)
 - A visual CML report about the model performance will be returned as a comment in the pull request
 
 The key file enabling these actions is `.github/workflows/cml.yaml`.
