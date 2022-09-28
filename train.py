@@ -23,7 +23,7 @@ print(acc)
 metrics = """
 Accuracy: {:10.4f}
 
-![Confusion Matrix](plog.png)
+![Confusion Matrix](plot.png)
 """.format(acc)
 with open("metrics.txt", "w") as outfile:
     outfile.write(metrics)
