@@ -4,7 +4,9 @@ jobs:
   train-model:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - uses: iterative/setup-cml@v1
       - uses: actions/setup-python@v2
         with:
@@ -17,6 +19,4 @@ jobs:
           python train.py
 
           # Create CML report
-          cat metrics.txt >> report.md
-          cml publish plot.png --md --title 'Confusion Matrix' >> report.md
-          cml send-comment report.md
+          cml comment create --pr --publish metrics.txt
