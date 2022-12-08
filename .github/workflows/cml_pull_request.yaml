@@ -1,0 +1,16 @@
+name: CML pull request
+on: pull_request
+jobs:
+  cml:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+    - uses: iterative/setup-cml@v1
+    - name: Display report
+      env:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo "Example CML comment on pull request" >> report.md
+        cml comment create --pr --publish report.md
