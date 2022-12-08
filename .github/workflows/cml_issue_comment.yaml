@@ -1,4 +1,4 @@
-name: CML push
+name: CML issue comment
 on: issue_comment
 jobs:
   cml:
