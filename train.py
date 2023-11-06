@@ -2,7 +2,7 @@ import json
 import os
 
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import plot_confusion_matrix
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -29,5 +29,8 @@ with open("metrics.txt", "w") as outfile:
     outfile.write(metrics)
 
 # Plot it
-disp = plot_confusion_matrix(clf, X_test, y_test, normalize="true", cmap=plt.cm.Blues)
+predictions = clf.predict(X_test)
+cm = confusion_matrix(y_test, predictions, labels=clf.classes_)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm,
+                              display_labels=clf.classes_)
 plt.savefig("plot.png")
