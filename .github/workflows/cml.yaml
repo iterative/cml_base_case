@@ -24,4 +24,5 @@ jobs:
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          cml pr create .
           cml comment create --target=pr --publish metrics.txt
