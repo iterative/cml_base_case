@@ -20,5 +20,4 @@ jobs:
 
           # Create CML report
           echo '![](./plot.png "Confusion Matrix")' >> report.md
-          cml comment create report.md
           cml comment create --target=pr --publish metrics.txt
