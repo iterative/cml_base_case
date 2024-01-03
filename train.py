@@ -21,15 +21,16 @@ clf.fit(X_train, y_train)
 acc = clf.score(X_test, y_test)
 print(acc)
 
-metrics = """
-Accuracy: {:10.4f}
-
-![Confusion Matrix](plot.png)
-""".format(acc)
+# Save metrics to a text file
+metrics = f"Accuracy: {acc:10.4f}\n"
 with open("metrics.txt", "w") as outfile:
     outfile.write(metrics)
 
+# Generate and save confusion matrix plot
 predictions = clf.predict(X_test)
 cm = confusion_matrix(y_test, predictions, labels=clf.classes_)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=clf.classes_)
+disp.plot(cmap=plt.cm.Blues, values_format=".4g")  # Display the confusion matrix
+plt.title("Confusion Matrix")
 plt.savefig("plot.png")
+plt.show()  # Show the plot before saving
