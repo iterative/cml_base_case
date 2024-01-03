@@ -17,4 +17,4 @@ jobs:
           python train.py
 
           # Create CML report
-          cml comment create --pr --publish metrics.txt
+          cml comment create --target=pr --publish metrics.txt
